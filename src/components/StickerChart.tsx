@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Calendar } from "lucide-react";
-import starSticker from "@/assets/star-sticker.png";
+import happyToothSticker from "@/assets/happy-tooth-sticker.png";
 import morningSun from "@/assets/morning-sun.png";
 import nightMoon from "@/assets/night-moon.png";
 
@@ -77,7 +77,7 @@ export const StickerChart = ({ onAddSticker, records }: StickerChartProps) => {
               <div className="mb-2 text-lg font-semibold">Morning</div>
               {todayRecord?.morning ? (
                 <div className="flex justify-center">
-                  <img src={starSticker} alt="Star" className="w-12 h-12 animate-celebrate" />
+                  <img src={happyToothSticker} alt="Happy Tooth" className="w-12 h-12 animate-celebrate" />
                 </div>
               ) : (
                 <Button 
@@ -98,7 +98,7 @@ export const StickerChart = ({ onAddSticker, records }: StickerChartProps) => {
               <div className="mb-2 text-lg font-semibold">Night</div>
               {todayRecord?.night ? (
                 <div className="flex justify-center">
-                  <img src={starSticker} alt="Star" className="w-12 h-12 animate-celebrate" />
+                  <img src={happyToothSticker} alt="Happy Tooth" className="w-12 h-12 animate-celebrate" />
                 </div>
               ) : (
                 <Button 
@@ -132,14 +132,14 @@ export const StickerChart = ({ onAddSticker, records }: StickerChartProps) => {
                   <div className="space-y-1">
                     <div className="h-8 flex justify-center items-center">
                       {record?.morning ? (
-                        <img src={starSticker} alt="Morning Star" className="w-6 h-6" />
+                        <img src={happyToothSticker} alt="Happy Tooth Morning" className="w-6 h-6" />
                       ) : (
                         <img src={morningSun} alt="Morning" className="w-6 h-6 opacity-30" />
                       )}
                     </div>
                     <div className="h-8 flex justify-center items-center">
                       {record?.night ? (
-                        <img src={starSticker} alt="Night Star" className="w-6 h-6" />
+                        <img src={happyToothSticker} alt="Happy Tooth Night" className="w-6 h-6" />
                       ) : (
                         <img src={nightMoon} alt="Night" className="w-6 h-6 opacity-30" />
                       )}
