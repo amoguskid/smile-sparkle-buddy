@@ -72,76 +72,84 @@ export const Timer = ({ onComplete }: TimerProps) => {
   };
 
   return (
-    <Card className="p-8 bg-gradient-to-br from-primary-light/20 to-secondary-light/20 border-2 border-primary/20 shadow-glow">
-      <div className="text-center space-y-8">
+    <Card className="p-6 md:p-8 bg-card/80 backdrop-blur-sm border-2 border-primary/30 shadow-glow animate-pop-in relative overflow-hidden">
+      {/* Decorative blobs */}
+      <div className="absolute -top-16 -right-16 w-40 h-40 bg-primary/20 rounded-full blur-2xl animate-blob" />
+      <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-secondary/20 rounded-full blur-2xl animate-blob" style={{ animationDelay: '2s' }} />
+      
+      <div className="relative text-center space-y-6 md:space-y-8">
         {/* Characters */}
-        <div className="flex justify-center items-center gap-8">
-          <div className={`transition-all duration-500 ${isRunning ? 'animate-bounce-gentle' : ''}`}>
+        <div className="flex justify-center items-center gap-6 md:gap-10">
+          <div className={`transition-all duration-500 ${isRunning ? 'animate-bounce-gentle' : 'animate-float'}`}>
             <img 
               src={happyTooth} 
               alt="Happy Tooth" 
-              className="w-24 h-24 object-contain"
+              className="w-20 h-20 md:w-28 md:h-28 object-contain drop-shadow-lg"
             />
           </div>
-          <div className={`transition-all duration-500 ${isRunning ? 'animate-wiggle' : ''}`}>
+          <div className={`transition-all duration-500 ${isRunning ? 'animate-wiggle' : 'animate-float'}`} style={{ animationDelay: '0.5s' }}>
             <img 
               src={toothbrushHero} 
               alt="Toothbrush Hero" 
-              className="w-24 h-24 object-contain"
+              className="w-20 h-20 md:w-28 md:h-28 object-contain drop-shadow-lg"
             />
           </div>
         </div>
 
         {/* Timer Display */}
         <div className="space-y-4">
-          <div className="text-8xl font-bold bg-gradient-rainbow bg-clip-text text-transparent animate-pulse-glow">
+          <div className={`text-7xl md:text-9xl font-lilita bg-gradient-rainbow bg-clip-text text-transparent ${isRunning ? 'animate-pulse-glow' : ''}`}>
             {minutes}:{seconds.toString().padStart(2, '0')}
           </div>
           
           {/* Progress Bar */}
-          <div className="w-full h-6 bg-gray-200 rounded-full overflow-hidden shadow-inner">
+          <div className="w-full h-6 md:h-8 bg-muted rounded-full overflow-hidden shadow-inner border-2 border-border">
             <div 
-              className="h-full bg-gradient-rainbow transition-all duration-1000 ease-out rounded-full"
+              className="h-full bg-gradient-rainbow transition-all duration-1000 ease-out rounded-full relative"
               style={{ width: `${progress}%` }}
-            />
+            >
+              {/* Sparkle effect on progress */}
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 bg-white/50 rounded-full blur-sm animate-pulse" />
+            </div>
           </div>
         </div>
 
         {/* Encouragement Message */}
-        <div className="text-2xl font-bold text-center animate-slide-up">
+        <div className="text-xl md:text-2xl font-nunito font-bold text-center animate-slide-up text-foreground">
           {getEncouragementMessage()}
         </div>
 
         {/* Control Buttons */}
-        <div className="flex justify-center gap-6">
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
           {!isRunning ? (
             <Button 
               variant="fun" 
-              size="xl" 
+              size="lg" 
               onClick={handleStart}
-              className="animate-pulse-glow"
+              className="animate-pulse-glow text-lg"
             >
-              <Play className="w-8 h-8" />
+              <Play className="w-6 h-6" />
               Start Brushing!
             </Button>
           ) : (
             <Button 
               variant="morning" 
-              size="xl" 
+              size="lg" 
               onClick={handlePause}
+              className="text-lg"
             >
-              <Pause className="w-8 h-8" />
+              <Pause className="w-6 h-6" />
               Pause
             </Button>
           )}
           
           <Button 
             variant="outline" 
-            size="xl" 
+            size="lg" 
             onClick={handleReset}
-            className="border-2 border-primary hover:bg-primary/10"
+            className="text-lg"
           >
-            <RotateCcw className="w-8 h-8" />
+            <RotateCcw className="w-6 h-6" />
             Reset
           </Button>
         </div>
