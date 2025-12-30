@@ -1,17 +1,19 @@
 import { useState } from "react";
 import { Timer } from "@/components/Timer";
 import { StickerChart } from "@/components/StickerChart";
+import { QRCodeShare } from "@/components/QRCodeShare";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useBrushingData } from "@/hooks/useBrushingData";
 import { toast } from "sonner";
-import { Sparkles, Timer as TimerIcon, Award } from "lucide-react";
+import { Sparkles, Timer as TimerIcon, Award, QrCode } from "lucide-react";
 import happyTooth from "@/assets/happy-tooth.png";
 
 type View = 'home' | 'timer' | 'chart';
 
 const Index = () => {
   const [currentView, setCurrentView] = useState<View>('home');
+  const [showQR, setShowQR] = useState(false);
   const { records, addBrushingSession, getTodaysProgress } = useBrushingData();
 
   const handleTimerComplete = () => {
@@ -180,7 +182,17 @@ const Index = () => {
           <div className="flex justify-center gap-4 text-4xl animate-bounce-gentle">
             🦷✨🌟✨🦷
           </div>
+          <Button
+            variant="outline"
+            onClick={() => setShowQR(true)}
+            className="mt-4"
+          >
+            <QrCode className="w-5 h-5 mr-2" />
+            Open on Another Device
+          </Button>
         </div>
+
+        {showQR && <QRCodeShare onClose={() => setShowQR(false)} />}
       </div>
     </div>
   );
