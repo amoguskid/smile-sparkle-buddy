@@ -18,6 +18,10 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'nunito': ['Nunito', 'sans-serif'],
+				'lilita': ['Lilita One', 'cursive'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -64,6 +68,10 @@ export default {
 					DEFAULT: 'hsl(var(--purple))',
 					light: 'hsl(var(--purple-light))'
 				},
+				mint: {
+					DEFAULT: 'hsl(var(--mint))',
+					light: 'hsl(var(--mint-light))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -102,30 +110,32 @@ export default {
 						transform: 'translateY(0)'
 					},
 					'50%': {
-						transform: 'translateY(-10px)'
+						transform: 'translateY(-15px)'
 					}
 				},
 				'wiggle': {
 					'0%, 100%': {
-						transform: 'rotate(-3deg)'
+						transform: 'rotate(-5deg)'
 					},
 					'50%': {
-						transform: 'rotate(3deg)'
+						transform: 'rotate(5deg)'
 					}
 				},
 				'pulse-glow': {
 					'0%, 100%': {
 						opacity: '1',
-						transform: 'scale(1)'
+						transform: 'scale(1)',
+						boxShadow: '0 0 20px hsl(var(--primary) / 0.3)'
 					},
 					'50%': {
-						opacity: '0.8',
-						transform: 'scale(1.05)'
+						opacity: '0.9',
+						transform: 'scale(1.03)',
+						boxShadow: '0 0 40px hsl(var(--primary) / 0.5)'
 					}
 				},
 				'slide-up': {
 					'0%': {
-						transform: 'translateY(20px)',
+						transform: 'translateY(30px)',
 						opacity: '0'
 					},
 					'100%': {
@@ -138,10 +148,62 @@ export default {
 						transform: 'scale(1) rotate(0deg)'
 					},
 					'25%': {
-						transform: 'scale(1.1) rotate(-5deg)'
+						transform: 'scale(1.2) rotate(-10deg)'
+					},
+					'50%': {
+						transform: 'scale(1.3) rotate(10deg)'
 					},
 					'75%': {
-						transform: 'scale(1.1) rotate(5deg)'
+						transform: 'scale(1.2) rotate(-5deg)'
+					}
+				},
+				'float': {
+					'0%, 100%': {
+						transform: 'translateY(0) rotate(0deg)'
+					},
+					'50%': {
+						transform: 'translateY(-20px) rotate(5deg)'
+					}
+				},
+				'blob': {
+					'0%, 100%': {
+						borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%'
+					},
+					'25%': {
+						borderRadius: '30% 60% 70% 40% / 50% 60% 30% 60%'
+					},
+					'50%': {
+						borderRadius: '50% 60% 40% 60% / 40% 50% 60% 50%'
+					},
+					'75%': {
+						borderRadius: '40% 60% 70% 30% / 60% 40% 50% 60%'
+					}
+				},
+				'jiggle': {
+					'0%, 100%': {
+						transform: 'rotate(-3deg) scale(1)'
+					},
+					'25%': {
+						transform: 'rotate(3deg) scale(1.02)'
+					},
+					'50%': {
+						transform: 'rotate(-3deg) scale(1)'
+					},
+					'75%': {
+						transform: 'rotate(3deg) scale(1.02)'
+					}
+				},
+				'pop-in': {
+					'0%': {
+						transform: 'scale(0)',
+						opacity: '0'
+					},
+					'60%': {
+						transform: 'scale(1.15)'
+					},
+					'100%': {
+						transform: 'scale(1)',
+						opacity: '1'
 					}
 				}
 			},
@@ -149,10 +211,14 @@ export default {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'bounce-gentle': 'bounce-gentle 2s ease-in-out infinite',
-				'wiggle': 'wiggle 1s ease-in-out infinite',
+				'wiggle': 'wiggle 0.8s ease-in-out infinite',
 				'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
-				'slide-up': 'slide-up 0.3s ease-out',
-				'celebrate': 'celebrate 0.6s ease-in-out'
+				'slide-up': 'slide-up 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+				'celebrate': 'celebrate 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+				'float': 'float 3s ease-in-out infinite',
+				'blob': 'blob 8s ease-in-out infinite',
+				'jiggle': 'jiggle 0.6s ease-in-out infinite',
+				'pop-in': 'pop-in 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards'
 			},
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',
@@ -160,13 +226,16 @@ export default {
 				'gradient-accent': 'var(--gradient-accent)',
 				'gradient-rainbow': 'var(--gradient-rainbow)',
 				'gradient-morning': 'var(--gradient-morning)',
-				'gradient-night': 'var(--gradient-night)'
+				'gradient-night': 'var(--gradient-night)',
+				'gradient-celebration': 'var(--gradient-celebration)',
+				'gradient-bubbly': 'var(--gradient-bubbly)'
 			},
 			boxShadow: {
 				'primary': 'var(--shadow-primary)',
 				'secondary': 'var(--shadow-secondary)',
 				'glow': 'var(--shadow-glow)',
-				'fun': 'var(--shadow-fun)'
+				'fun': 'var(--shadow-fun)',
+				'bubbly': 'var(--shadow-bubbly)'
 			}
 		}
 	},
