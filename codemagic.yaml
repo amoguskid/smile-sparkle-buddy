@@ -43,6 +43,8 @@ workflows:
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.despia.brushingapp
+      vars:
+        APP_STORE_APPLE_ID: 6757212247
 
     scripts:
       - name: Install dependencies
@@ -63,13 +65,24 @@ workflows:
             --project ios/App/App.xcodeproj \
             --archive-method app-store
 
+      - name: Determine next Apple build number
+        script: |
+          LATEST_BUILD_NUMBER=$(app-store-connect get-latest-build-number "$APP_STORE_APPLE_ID" --all-versions)
+          if [ -z "$LATEST_BUILD_NUMBER" ]; then
+            NEXT_BUILD_NUMBER=1
+          else
+            NEXT_BUILD_NUMBER=$((LATEST_BUILD_NUMBER + 1))
+          fi
+          echo "NEXT_BUILD_NUMBER=$NEXT_BUILD_NUMBER" >> "$CM_ENV"
+          echo "Using Apple build number $NEXT_BUILD_NUMBER"
+
       - name: Build signed IPA
         script: |
           cd ios/App
           xcode-project build-ipa \
             --project App.xcodeproj \
             --scheme App \
-            --archive-xcargs "CURRENT_PROJECT_VERSION=$BUILD_NUMBER MARKETING_VERSION=1.0"
+            --archive-xcargs "CURRENT_PROJECT_VERSION=$NEXT_BUILD_NUMBER MARKETING_VERSION=1.0"
 
     artifacts:
       - ios/App/build/ios/ipa/*.ipa
