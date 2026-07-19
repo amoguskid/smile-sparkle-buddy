@@ -59,6 +59,21 @@ workflows:
       - name: Sync Capacitor
         script: npx cap sync ios
 
+      - name: Generate final iOS app icon
+        script: |
+          mkdir -p assets
+          cp icon-only.png assets/icon-only.png
+          npx --yes --package @capacitor/assets capacitor-assets generate --ios
+
+      - name: Configure export compliance
+        script: |
+          /usr/libexec/PlistBuddy \
+            -c "Add :ITSAppUsesNonExemptEncryption bool false" \
+            ios/App/App/Info.plist || \
+          /usr/libexec/PlistBuddy \
+            -c "Set :ITSAppUsesNonExemptEncryption false" \
+            ios/App/App/Info.plist
+
       - name: Set up App Store code signing
         script: |
           xcode-project use-profiles \
